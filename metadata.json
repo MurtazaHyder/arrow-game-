@@ -1,0 +1,6 @@
+{
+  "name": "Arrow Puzzle",
+  "description": "A puzzle game where you tap arrows to clear them.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Arrow Puzzle</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Welcome Screen -->
+        <div id="screen-welcome" class="screen active">
+            <div class="content-center">
+                <h1 class="welcome-title">Welcome!</h1>
+                <p class="terms-text">
+                    Please read and accept our <a href="#">Terms</a> and <a href="#">Privacy Policy</a> which set out the terms of use of our app and explain how we collect, use and process your information.
+                </p>
+                <button id="btn-accept" class="btn btn-primary btn-large">Accept</button>
+            </div>
+        </div>
+
+        <!-- Main Screen -->
+        <div id="screen-main" class="screen">
+            <div class="content-center">
+                <div id="streak-banner" class="streak-pill">🔥 1 Day Streak</div>
+                <div class="daily-card">
+                    <div class="calendar-icon">📅</div>
+                    <div class="daily-label">DAILY CHALLENGE</div>
+                    <div class="daily-date">July 22</div>
+                    <button id="btn-daily-play" class="btn btn-glass">Play</button>
+                </div>
+                <h1 class="main-title">Arrow Puzzle</h1>
+                <button id="btn-new-game" class="btn btn-primary btn-huge">
+                    <span class="btn-title">New Game</span>
+                    <span class="btn-subtitle">Level <span id="main-level-text">1</span></span>
+                </button>
+                <button id="btn-scoreboard" class="btn btn-glass btn-small" style="margin-top: 16px;">🏆 Scoreboard</button>
+            </div>
+            <div class="bottom-nav">
+                <div class="nav-item active">🏠<br>Main</div>
+                <div id="btn-daily-tab" class="nav-item">📅<br>Daily</div>
+                <div id="btn-me-tab" class="nav-item">👤<br>Me</div>
+            </div>
+        </div>
+
+        <!-- Scoreboard Modal -->
+        <div id="modal-scoreboard" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2>🏆 Scoreboard</h2>
+                    <button id="btn-close-scoreboard" class="icon-btn-small">✖</button>
+                </div>
+                <div class="scoreboard-stats">
+                    <div class="sb-stat-item">
+                        <span class="sb-label">High Score</span>
+                        <span id="sb-high-score" class="sb-val">0</span>
+                    </div>
+                    <div class="sb-stat-item">
+                        <span class="sb-label">Total Levels</span>
+                        <span id="sb-total-levels" class="sb-val">0</span>
+                    </div>
+                </div>
+                <div class="scoreboard-list" id="scoreboard-list">
+                    <!-- Dynamic entries -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Missions Modal -->
+        <div id="modal-daily-missions" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2>🎯 Daily Missions</h2>
+                    <button id="btn-close-missions" class="icon-btn-small">✖</button>
+                </div>
+                <div class="missions-list" id="missions-list">
+                    <!-- Dynamic daily mission items -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sound & Game Settings Modal -->
+        <div id="modal-settings" class="modal-overlay hidden">
+            <div class="modal-card">
+                <div class="modal-header">
+                    <h2>⚙️ Settings</h2>
+                    <button id="btn-close-settings" class="icon-btn-small">✖</button>
+                </div>
+                <div class="settings-group">
+                    <div class="settings-row">
+                        <div class="setting-info">
+                            <span class="setting-title">🎵 Background Music</span>
+                            <span class="setting-desc">Web Audio synthesizer melody</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-bgm" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <div class="setting-info">
+                            <span class="setting-title">🔊 Sound Effects</span>
+                            <span class="setting-desc">Tap & clear audio feedback</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-sfx" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                    <div class="settings-row">
+                        <div class="setting-info">
+                            <span class="setting-title">📳 Haptic Vibration</span>
+                            <span class="setting-desc">Tactile response on interactions</span>
+                        </div>
+                        <label class="toggle-switch">
+                            <input type="checkbox" id="toggle-vibration" checked>
+                            <span class="toggle-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tutorial Overlay -->
+        <div id="modal-tutorial" class="modal-overlay hidden">
+            <div class="modal-card text-center">
+                <h2>🎯 How to Play</h2>
+                <div class="tutorial-card">
+                    <div class="tutorial-step">
+                        <span class="step-icon">👆</span>
+                        <div class="step-text">
+                            <strong>Tap to Launch:</strong>
+                            <p>Arrows fly in the exact direction they point.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-step">
+                        <span class="step-icon">🧱</span>
+                        <div class="step-text">
+                            <strong>Watch for Obstacles:</strong>
+                            <p>Avoid hitting static barriers or intersecting arrows.</p>
+                        </div>
+                    </div>
+                    <div class="tutorial-step">
+                        <span class="step-icon">✨</span>
+                        <div class="step-text">
+                            <strong>Clear the Board:</strong>
+                            <p>Remove all arrows cleanly to complete the level!</p>
+                        </div>
+                    </div>
+                </div>
+                <button id="btn-close-tutorial" class="btn btn-primary btn-large" style="margin-top: 16px;">Got It! Start Playing</button>
+            </div>
+        </div>
+
+        <!-- Daily Streak Modal -->
+        <div id="modal-streak" class="modal-overlay hidden">
+            <div class="modal-card text-center">
+                <h2 id="streak-title">🔥 Daily Streak!</h2>
+                <p id="streak-desc" style="margin: 12px 0; color: #64748B;">You logged in consecutive days!</p>
+                <div class="reward-box" style="font-size: 20px; font-weight: bold; color: #3B82F6; background: #EFF6FF; padding: 12px; border-radius: 12px; margin-bottom: 20px;">
+                    🎁 +<span id="streak-reward-coins">5</span> Coins Claimed!
+                </div>
+                <button id="btn-claim-streak" class="btn btn-primary btn-large">Awesome!</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="screen-game" class="screen">
+            <div class="top-bar">
+                <button id="btn-back" class="icon-btn">⬅️</button>
+                <h2 id="game-level-title" class="top-title">Level 1</h2>
+                <button id="btn-settings" class="icon-btn">⚙️</button>
+            </div>
+            <div class="stats-bar">
+                <div class="stat-pill">🪙 6</div>
+                <div class="hearts">
+                    <span class="heart active">❤️</span>
+                    <span class="heart active">❤️</span>
+                    <span class="heart active">❤️</span>
+                </div>
+                <div id="difficulty-badge" class="stat-pill">Normal</div>
+            </div>
+            <div class="game-container">
+                <canvas id="game-canvas"></canvas>
+            </div>
+            <div class="bottom-bar">
+                <button class="hint-btn">💡<span class="badge">2</span></button>
+                <button class="grid-btn">#</button>
+            </div>
+        </div>
+
+        <!-- Level Complete Screen -->
+        <div id="screen-complete" class="screen bg-radial">
+            <div class="content-center">
+                <h1 class="complete-title">Level Completed!</h1>
+                <div class="level-snapshot">
+                    <canvas id="snapshot-canvas"></canvas>
+                </div>
+                <div class="progress-card">
+                    <div class="progress-header">
+                        <span class="progress-label">Performance Score</span>
+                        <span id="score-text" class="progress-val">0% (+100 PTS)</span>
+                    </div>
+                    <div class="progress-bar-bg">
+                        <div id="complete-progress-bar" class="progress-bar-fill"></div>
+                    </div>
+                </div>
+                <button id="btn-next-level" class="btn btn-white btn-huge">
+                    <span class="btn-title blue-text">Next Game</span>
+                    <span class="btn-subtitle blue-text">Level <span id="next-level-text">2</span></span>
+                </button>
+                <button id="btn-complete-main" class="btn-text">Main</button>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
